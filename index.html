@@ -78,6 +78,14 @@
         
         .social-icons { display: flex; gap: 20px; margin-top: 15px; }
         .social-icons a { font-size: 24px; color: #000; text-decoration: none; transition: transform 0.2s; }
+        
+        /* New Footer Elements Styling */
+        .newsletter-form { display: flex; gap: 10px; flex-wrap: wrap; max-width: 400px; }
+        .newsletter-form input { padding: 12px 15px; flex: 1; min-width: 200px; border: 1px solid rgba(0,0,0,0.2); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; background: #fff; }
+        .newsletter-form button { padding: 12px 25px; background: #000; color: #fff; border: none; font-family: 'Inter', sans-serif; cursor: pointer; letter-spacing: 1px; font-size: 12px; text-transform: uppercase; font-weight: 600; transition: background 0.3s; }
+        .newsletter-form button:hover { background: #333; }
+        .payment-badges { display: flex; gap: 12px; align-items: center; margin-top: 15px; flex-wrap: wrap; font-size: 28px; color: #333; }
+        .payment-badge-text { font-size: 11px; font-weight: 600; color: #fff; padding: 6px 10px; border-radius: 4px; letter-spacing: 1px; display: inline-block; }
 
         #mask { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 3500; display: none; }
     </style>
@@ -138,11 +146,32 @@
     </div>
 
     <footer class="talism-footer">
+        <!-- VIP Newsletter Section -->
+        <div class="footer-col">
+            <h4>Join the VIP Club</h4>
+            <p style="margin-bottom: 15px;">Subscribe for exclusive access to new arrivals & VIP offers.</p>
+            <form action="#" class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+
         <div class="footer-col">
             <h4>Information</h4>
             <a href="#">Delivery & Returns</a>
+            <a href="#">Refund & Exchange Policy</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
             <a href="#">About Us</a>
-            <a href="#">Customer Care</a>
+        </div>
+
+        <!-- Customer Assist Section -->
+        <div class="footer-col">
+            <h4>Customer Assist</h4>
+            <a href="#">Track Your Order</a>
+            <a href="#">Size Guide</a>
+            <a href="#">FAQs</a>
+            <a href="#">Product Care Guide</a>
         </div>
         
         <div class="footer-col">
@@ -162,7 +191,20 @@
                 <a href="#"><i class="fa-brands fa-facebook"></i></a>
             </div>
         </div>
-        <p style="font-size: 10px; margin-top: 50px; opacity: 0.4; letter-spacing: 1px;">© 2026 TALISM LUXURY STORE. ALL RIGHTS RESERVED.</p>
+
+        <!-- Payment Badges Section -->
+        <div style="margin-top: 50px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 30px;">
+            <p style="font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase;">Secure Payments</p>
+            <div class="payment-badges">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-solid fa-money-bill-wave" title="Cash on Delivery"></i>
+                <span class="payment-badge-text" style="background: #1a8a3c;">M-PESA</span>
+                <span class="payment-badge-text" style="background: #0055A5;">TIGO PESA</span>
+            </div>
+        </div>
+
+        <p style="font-size: 10px; margin-top: 30px; opacity: 0.4; letter-spacing: 1px;">© 2026 TALISM LUXURY STORE. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
