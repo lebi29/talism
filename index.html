@@ -46,90 +46,35 @@
 
         /* --- ENHANCED SIDEBAR --- */
         #menu-sb { 
-            position: fixed; 
-            top: 0; 
-            left: -100%; 
-            width: 300px; 
-            max-width: 85%;
-            height: 100%; 
-            background: #F4EBEB; 
-            z-index: 4000; 
+            position: fixed; top: 0; left: -100%; width: 300px; max-width: 85%;
+            height: 100%; background: #F4EBEB; z-index: 4000; 
             transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            padding: 25px 25px 30px 25px; 
-            display: flex; 
-            flex-direction: column; 
-            box-sizing: border-box;
-            overflow-y: auto;
-            border: none;
+            padding: 25px 25px 30px 25px; display: flex; flex-direction: column; 
+            box-sizing: border-box; overflow-y: auto; border: none;
         }
         #menu-sb.open { left: 0; box-shadow: 10px 0 30px rgba(0,0,0,0.15); }
 
-        .sb-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-        }
+        .sb-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.06); }
         .sb-logo { height: 26px; width: auto; }
         .sb-close { font-size: 28px; cursor: pointer; color: #000; line-height: 1; }
 
         .sb-links-group { display: flex; flex-direction: column; gap: 18px; }
-        .sb-link { 
-            text-decoration: none; 
-            color: #000; 
-            font-size: 13px; 
-            letter-spacing: 2px; 
-            font-weight: 600; 
-            transition: color 0.2s;
-            display: block;
-        }
+        .sb-link { text-decoration: none; color: #000; font-size: 13px; letter-spacing: 2px; font-weight: 600; transition: color 0.2s; display: block; }
         .sb-link:hover { color: #555; }
 
-        .sb-divider { 
-            border: 0; 
-            border-top: 1px solid rgba(0,0,0,0.08); 
-            margin: 22px 0; 
-        }
+        .sb-divider { border: 0; border-top: 1px solid rgba(0,0,0,0.08); margin: 22px 0; }
 
         .sb-subgroup { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
-        .sb-sub-title { 
-            font-size: 13px; 
-            letter-spacing: 2px; 
-            color: #000; 
-            font-weight: 600; 
-            margin-bottom: 6px; 
-            text-transform: uppercase; 
-            display: block;
-        }
-        .sb-sub-link {
-            text-decoration: none;
-            color: #444;
-            font-size: 12.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: color 0.2s;
-        }
+        .sb-sub-title { font-size: 13px; letter-spacing: 2px; color: #000; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; display: block; }
+        .sb-sub-link { text-decoration: none; color: #444; font-size: 12.5px; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
         .sb-sub-link i { font-size: 13px; width: 16px; text-align: center; color: #000; }
         .sb-sub-link:hover { color: #000; }
 
         .sb-footer { margin-top: auto; padding-top: 30px; }
         .sb-whatsapp-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #25D366;
-            color: #fff;
-            text-decoration: none;
-            padding: 11px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: #25D366; color: #fff; text-decoration: none; padding: 11px;
+            border-radius: 8px; font-size: 12px; font-weight: 600; letter-spacing: 1px; margin-bottom: 20px;
         }
         .sb-socials { display: flex; gap: 18px; justify-content: center; }
         .sb-socials a { color: #000; font-size: 20px; text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
@@ -258,10 +203,11 @@
         </div>
     </nav>
 
+    <!-- SEARCH BAR DROPDOWN WITH KEYPRESS ROUTER -->
     <div id="search-dropdown">
         <div class="search-container">
             <i class="fa-solid fa-magnifying-glass" style="color: #888;"></i>
-            <input type="text" placeholder="Search for perfumes, clothing...">
+            <input type="text" id="search-input" placeholder="Search (e.g. perfume, abaya, hijab)..." onkeypress="handleSearch(event)">
             <i class="fa-solid fa-xmark" style="cursor: pointer; color: #888;" onclick="toggleSearch()"></i>
         </div>
     </div>
@@ -358,6 +304,7 @@
             var searchBar = document.getElementById('search-dropdown');
             if (searchBar.style.display === 'none' || searchBar.style.display === '') {
                 searchBar.style.display = 'block';
+                document.getElementById('search-input').focus();
             } else {
                 searchBar.style.display = 'none';
             }
@@ -366,9 +313,38 @@
         function toggleStaraMenu() {
             var dropdown = document.getElementById("stara-dropdown");
             var arrow = document.getElementById("stara-arrow");
-            
             dropdown.classList.toggle("show");
             arrow.classList.toggle("rotate");
+        }
+
+        // --- SMART SEARCH ROUTER ---
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const query = event.target.value.toLowerCase().trim();
+                if (!query) return;
+
+                // Match keywords to your respective pages
+                if (query.includes('perfume') || query.includes('scent') || query.includes('fragrance')) {
+                    window.location.href = 'perfume.html';
+                } else if (query.includes('abaya') || query.includes('kimono') || query.includes('stara') || query.includes('clothing')) {
+                    window.location.href = 'abaya-kimonos.html';
+                } else if (query.includes('kaftan')) {
+                    window.location.href = 'kaftans.html';
+                } else if (query.includes('maxi') || query.includes('dress')) {
+                    window.location.href = 'maxi-dresses.html';
+                } else if (query.includes('hijab') || query.includes('niqab')) {
+                    window.location.href = 'hijabs.html';
+                } else if (query.includes('handbag') || query.includes('bag')) {
+                    window.location.href = 'handbags.html';
+                } else if (query.includes('new') || query.includes('arrival')) {
+                    window.location.href = 'new-arrivals.html';
+                } else if (query.includes('track') || query.includes('order')) {
+                    window.location.href = 'track-order.html';
+                } else {
+                    // Default fallback to main shop page if no specific keyword matches
+                    window.location.href = 'shop.html';
+                }
+            }
         }
     </script>
 </body>
