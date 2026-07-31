@@ -125,6 +125,27 @@
         .sb-socials a { color: #000; font-size: 20px; text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
         .sb-socials a:hover { opacity: 1; }
 
+        /* --- SIDEBAR DROPDOWN STYLES --- */
+        .sb-dropdown { width: 100%; }
+        .sb-dropdown-btn {
+            background: none; border: none; width: 100%; text-align: left; padding: 0;
+            color: #000; font-size: 13px; letter-spacing: 2px; font-weight: 600;
+            font-family: 'Inter', sans-serif; cursor: pointer; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .sb-arrow { font-size: 11px; transition: transform 0.3s ease; }
+        .sb-dropdown-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+            display: flex; flex-direction: column; gap: 12px; padding-left: 10px; margin-top: 0;
+        }
+        .sb-dropdown-content.show { max-height: 200px; margin-top: 14px; margin-bottom: 5px; }
+        .sb-dropdown-content a {
+            text-decoration: none; color: #555; font-size: 12px; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+        }
+        .sb-dropdown-content a:hover { color: #000; }
+        .sb-arrow.rotate { transform: rotate(180deg); }
+
         /* --- HERO & SECTIONS --- */
         .hero-text { text-align: center; padding: 160px 20px 80px 20px; color: #000; }
         .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 0; }
@@ -179,17 +200,29 @@
         <!-- Main Navigation Links -->
         <div class="sb-links-group">
             <a href="index.html" class="sb-link">HOME</a>
-            <a href="shop.html" class="sb-link">NEW ARRIVALS</a>
-            <a href="shop.html" class="sb-link">STARA CLOTHING</a>
-            <a href="shop.html" class="sb-link">SIGNATURE SCENTS</a>
+            <a href="shop.html?category=new-arrivals" class="sb-link">NEW ARRIVALS</a>
+            
+            <!-- Collapsible Stara Clothing Dropdown -->
+            <div class="sb-dropdown">
+                <button class="sb-dropdown-btn" onclick="toggleStaraMenu()">
+                    STARA CLOTHING <i class="fa-solid fa-chevron-down sb-arrow" id="stara-arrow"></i>
+                </button>
+                <div class="sb-dropdown-content" id="stara-dropdown">
+                    <a href="shop.html?category=abayas-kimonos"><i class="fa-solid fa-angle-right"></i> Abayas & Kimonos</a>
+                    <a href="shop.html?category=kaftans"><i class="fa-solid fa-angle-right"></i> Elegant Kaftans</a>
+                    <a href="shop.html?category=maxi-dresses"><i class="fa-solid fa-angle-right"></i> Modest Maxi Dresses</a>
+                </div>
+            </div>
+
+            <a href="shop.html?category=hijabs-niqabs" class="sb-link">HIJABS & NIQABS</a>
+            <a href="shop.html?category=handbags" class="sb-link">MINIMALIST HANDBAGS</a>
+            <a href="shop.html?category=signature-scents" class="sb-link">SIGNATURE SCENTS</a>
         </div>
 
         <hr class="sb-divider">
 
-        <!-- Secondary Links (Info & Customer Help) -->
+        <!-- Secondary Links (Customer Help) -->
         <div class="sb-links-group">
-            <a href="about.html" class="sb-link">ABOUT TALISM</a>
-            
             <div class="sb-subgroup">
                 <span class="sb-sub-title">CUSTOMER HELP</span>
                 <a href="track-order.html" class="sb-sub-link"><i class="fa-solid fa-location-dot"></i> Track Order</a>
@@ -328,6 +361,15 @@
                 searchBar.style.display = 'none';
             }
         }
+        
+        function toggleStaraMenu() {
+            var dropdown = document.getElementById("stara-dropdown");
+            var arrow = document.getElementById("stara-arrow");
+            
+            dropdown.classList.toggle("show");
+            arrow.classList.toggle("rotate");
+        }
     </script>
 </body>
 </html>
+
