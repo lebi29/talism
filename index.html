@@ -27,7 +27,7 @@
         .nav-logo img { height: 32px; width: auto; display: block; } 
         .icon-btn { color: #000; font-size: 22px; cursor: pointer; background: none; border: none; padding: 5px; }
 
-        /* --- SEARCH BAR DROPDOWN (NEW) --- */
+        /* --- SEARCH BAR DROPDOWN --- */
         #search-dropdown {
             display: none; position: fixed; top: 75px; left: 0; width: 100%; 
             background: #F4EBEB; padding: 15px 20px; z-index: 2500; 
@@ -42,14 +42,88 @@
             outline: none; font-family: 'Inter', sans-serif;
         }
 
-        /* --- SIDEBAR --- */
+        /* --- ENHANCED SIDEBAR --- */
         #menu-sb { 
-            position: fixed; top: 0; left: -100%; width: 280px; height: 100%; 
-            background: #F4EBEB; z-index: 4000; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            padding: 80px 25px; display: flex; flex-direction: column; border: none;
+            position: fixed; 
+            top: 0; 
+            left: -100%; 
+            width: 300px; 
+            max-width: 85%;
+            height: 100%; 
+            background: #F4EBEB; 
+            z-index: 4000; 
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            padding: 25px 25px 30px 25px; 
+            display: flex; 
+            flex-direction: column; 
+            box-sizing: border-box;
+            overflow-y: auto;
+            border: none;
         }
-        #menu-sb.open { left: 0; box-shadow: 10px 0 30px rgba(0,0,0,0.1); }
-        .sb-link { display: block; text-decoration: none; color: #000; font-size: 13px; letter-spacing: 2px; margin-bottom: 25px; font-weight: 500; }
+        #menu-sb.open { left: 0; box-shadow: 10px 0 30px rgba(0,0,0,0.15); }
+
+        .sb-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .sb-logo { height: 26px; width: auto; }
+        .sb-close { font-size: 28px; cursor: pointer; color: #000; line-height: 1; }
+
+        .sb-links-group { display: flex; flex-direction: column; gap: 18px; }
+        .sb-link { 
+            text-decoration: none; 
+            color: #000; 
+            font-size: 13px; 
+            letter-spacing: 2px; 
+            font-weight: 600; 
+            transition: color 0.2s;
+            display: block;
+        }
+        .sb-link:hover { color: #555; }
+
+        .sb-divider { 
+            border: 0; 
+            border-top: 1px solid rgba(0,0,0,0.08); 
+            margin: 22px 0; 
+        }
+
+        .sb-subgroup { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+        .sb-sub-title { font-size: 10px; letter-spacing: 2px; color: #777; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; }
+        .sb-sub-link {
+            text-decoration: none;
+            color: #444;
+            font-size: 12.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+        }
+        .sb-sub-link i { font-size: 13px; width: 16px; text-align: center; color: #000; }
+        .sb-sub-link:hover { color: #000; }
+
+        .sb-footer { margin-top: auto; padding-top: 30px; }
+        .sb-whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .sb-socials { display: flex; gap: 18px; justify-content: center; }
+        .sb-socials a { color: #000; font-size: 20px; text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
+        .sb-socials a:hover { opacity: 1; }
 
         /* --- HERO & SECTIONS --- */
         .hero-text { text-align: center; padding: 160px 20px 80px 20px; color: #000; }
@@ -94,13 +168,48 @@
 
     <div id="mask" onclick="closeMenu()"></div>
 
+    <!-- SIDEBAR DRAWER -->
     <div id="menu-sb">
-        <span style="position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer;" onclick="closeMenu()">&times;</span>
-        <a href="shop.html" class="sb-link">NEW ARRIVALS</a>
-        <a href="shop.html" class="sb-link">STARA CLOTHING</a>
-        <a href="shop.html" class="sb-link">SIGNATURE SCENTS</a>
-        <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 20px 0 30px;">
-        <a href="#" class="sb-link">ABOUT TALISM</a>
+        <!-- Sidebar Header -->
+        <div class="sb-header">
+            <img src="logo2.png" alt="TALISM" class="sb-logo">
+            <span class="sb-close" onclick="closeMenu()">&times;</span>
+        </div>
+
+        <!-- Main Navigation Links -->
+        <div class="sb-links-group">
+            <a href="index.html" class="sb-link">HOME</a>
+            <a href="shop.html" class="sb-link">NEW ARRIVALS</a>
+            <a href="shop.html" class="sb-link">STARA CLOTHING</a>
+            <a href="shop.html" class="sb-link">SIGNATURE SCENTS</a>
+        </div>
+
+        <hr class="sb-divider">
+
+        <!-- Secondary Links (Info & Customer Help) -->
+        <div class="sb-links-group">
+            <a href="about.html" class="sb-link">ABOUT TALISM</a>
+            
+            <div class="sb-subgroup">
+                <span class="sb-sub-title">CUSTOMER HELP</span>
+                <a href="track-order.html" class="sb-sub-link"><i class="fa-solid fa-location-dot"></i> Track Order</a>
+                <a href="size-guide.html" class="sb-sub-link"><i class="fa-solid fa-ruler-horizontal"></i> Size Guide</a>
+                <a href="faqs.html" class="sb-sub-link"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+                <a href="product-care.html" class="sb-sub-link"><i class="fa-solid fa-sparkles"></i> Product Care</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="sb-footer">
+            <a href="https://wa.me/255684143537?text=Hello%20TALISM!" target="_blank" class="sb-whatsapp-btn">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+            <div class="sb-socials">
+                <a href="https://www.instagram.com/_.talism_perfume?igsh=bm0zazZnZDhzcG84" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@_.talism_perfume?_r=1&_t=ZS-93Qk6xkd6Xq" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://whatsapp.com/channel/0029VbBcgBhLdQeWkzNJ1l0n" target="_blank"><i class="fa-solid fa-tower-broadcast"></i></a>
+            </div>
+        </div>
     </div>
 
     <nav>
