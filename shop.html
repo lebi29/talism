@@ -20,6 +20,52 @@
         .nav-logo img { height: 32px; width: auto; } 
         .icon-btn { color: #000; font-size: 22px; cursor: pointer; background: none; border: none; padding: 10px; }
 
+        /* --- SIDEBAR MENU --- */
+        .sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(0,0,0,0.4); z-index: 3999; 
+            opacity: 0; visibility: hidden; transition: 0.3s ease;
+        }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
+
+        .sidebar {
+            position: fixed; top: 0; left: -100%; width: 85%; max-width: 380px; height: 100vh;
+            background-color: #F4EBEB; z-index: 4000; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex; flex-direction: column; overflow-y: auto;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar.active { left: 0; }
+
+        .sidebar-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 30px 25px 20px; border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .sidebar-header h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0; letter-spacing: 2px; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #000; padding: 0; }
+
+        .sidebar-menu { list-style: none; padding: 25px; margin: 0; flex-grow: 1; }
+        .sidebar-menu li { margin-bottom: 22px; }
+        .sidebar-menu a {
+            text-decoration: none; color: #000; font-size: 13px; font-weight: 600;
+            letter-spacing: 1.5px; text-transform: uppercase; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+
+        .sidebar-help { padding: 0 25px; margin-bottom: 30px; }
+        .help-title { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; margin-bottom: 15px; }
+        .sidebar-help a {
+            display: flex; align-items: center; text-decoration: none; color: #444;
+            font-size: 14px; margin-bottom: 12px; font-weight: 400;
+        }
+        .sidebar-help a i { width: 25px; font-size: 14px; text-align: left; }
+
+        .whatsapp-btn-container { padding: 0 25px 30px; }
+        .whatsapp-btn {
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            background-color: #25D366; color: #fff; text-decoration: none;
+            padding: 14px 0; border-radius: 6px; font-weight: 500; font-size: 15px;
+        }
+
         /* --- SHOP CONTENT --- */
         header { text-align: center; padding: 130px 20px 40px; }
         header h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 5px; }
@@ -49,7 +95,7 @@
             text-decoration: none;
             font-size: 11px;
             font-weight: 600;
-            letter-spacing: 3px; /* Inaleta muonekano wa luxury */
+            letter-spacing: 3px; 
             text-transform: uppercase;
             transition: 0.3s ease;
             border-radius: 2px;
@@ -76,7 +122,7 @@
         @media (max-width: 600px) {
             .grid-mini { grid-template-columns: repeat(2, 1fr); }
             header h1 { font-size: 1.8rem; }
-            .view-all-btn { width: 80%; } /* Inakaa vizuri zaidi kwenye simu */
+            .view-all-btn { width: 80%; } 
         }
 
         /* --- FOOTER --- */
@@ -88,11 +134,44 @@
 </head>
 <body>
 
+    <!-- NAVIGATION -->
     <nav>
-        <div class="nav-left"><button class="icon-btn"><i class="fa-solid fa-bars"></i></button></div>
+        <div class="nav-left"><button class="icon-btn" onclick="openMenu()"><i class="fa-solid fa-bars"></i></button></div>
         <div class="nav-center"><a href="index.html" class="nav-logo"><img src="logo2.png" alt="TALISM"></a></div>
         <div class="nav-right"><button class="icon-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div>
     </nav>
+
+    <!-- SIDEBAR MENU -->
+    <div class="sidebar-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="sidebar" id="sideMenu">
+        <div class="sidebar-header">
+            <h2>TALISM</h2>
+            <button class="close-btn" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="shop.html">SHOP COLLECTION</a></li>
+            <li><a href="new-arrivals.html">NEW ARRIVALS</a></li>
+            <li><a href="hijabs.html">HIJABS & NIQABS</a></li>
+            <li><a href="handbags.html">MINIMALIST HANDBAGS</a></li>
+            <li><a href="perfume.html">SIGNATURE SCENTS</a></li>
+        </ul>
+
+        <div class="sidebar-help">
+            <p class="help-title">CUSTOMER HELP</p>
+            <a href="#"><i class="fa-solid fa-location-dot"></i> Track Order</a>
+            <a href="#"><i class="fa-solid fa-ruler-horizontal"></i> Size Guide</a>
+            <a href="#"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+            <a href="#" style="padding-left: 25px;">Product Care</a>
+        </div>
+
+        <div class="whatsapp-btn-container">
+            <a href="https://wa.me/255684143537" class="whatsapp-btn">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+        </div>
+    </div>
 
     <header>
         <h1>Our Collection</h1>
@@ -179,40 +258,44 @@
         <p class="copyright">© 2026 TALISM LUXURY STORE. ALL RIGHTS RESERVED.</p>
     </footer>
 
-    <!-- DYNAMIC SEARCH FILTER SCRIPT FOR SHOP PAGE -->
+    <!-- DYNAMIC SIDEBAR & SEARCH FILTER SCRIPT -->
     <script>
+        // Sidebar functionality
+        function openMenu() {
+            document.getElementById('sideMenu').classList.add('active');
+            document.getElementById('menuOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('active');
+            document.getElementById('menuOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
-            // 1. Get the searched word from the URL (e.g. ?search=abaya)
             const urlParams = new URLSearchParams(window.location.search);
             const searchQuery = urlParams.get('search');
 
             if (searchQuery) {
                 const query = searchQuery.toLowerCase();
-                
-                // 2. Find all category sections on the shop page
                 const sections = document.querySelectorAll('.collection-section'); 
                 let itemsFound = false;
 
                 sections.forEach(section => {
-                    // 3. Check section titles
                     const sectionText = section.innerText.toLowerCase();
-                    
-                    // 4. Check image names just in case
                     const images = section.querySelectorAll('img');
                     let altText = '';
                     images.forEach(img => altText += img.alt.toLowerCase() + ' ');
 
-                    // If the typed word matches the section or its images, show it
                     if (sectionText.includes(query) || altText.includes(query)) {
                         section.style.display = ''; 
                         itemsFound = true;
                     } else {
-                        // Otherwise, hide it
                         section.style.display = 'none'; 
                     }
                 });
 
-                // 5. Update the main header to show it is a search result
                 const headerH1 = document.querySelector('header h1');
                 const headerP = document.querySelector('header p');
                 
