@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TALISM | New Arrivals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        body { margin: 0; font-family: 'Inter', sans-serif; background-color: #F4EBEB; color: #333; overflow-x: hidden; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: grid; grid-template-columns: 60px 1fr 60px; align-items: center;
+            padding: 0 10px; position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+            background-color: #E9CDCE; height: 75px; 
+        }
+        .nav-center { display: flex; justify-content: center; }
+        .nav-logo img { height: 32px; width: auto; } 
+        .icon-btn { color: #000; font-size: 22px; cursor: pointer; background: none; border: none; padding: 10px; }
+
+        /* --- SIDEBAR MENU (Based on 1001028121.jpg) --- */
+        .sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(0,0,0,0.4); z-index: 2999; 
+            opacity: 0; visibility: hidden; transition: 0.3s ease;
+        }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
+
+        .sidebar {
+            position: fixed; top: 0; left: -100%; width: 85%; max-width: 380px; height: 100vh;
+            background-color: #F4EBEB; z-index: 3000; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex; flex-direction: column; overflow-y: auto;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar.active { left: 0; }
+
+        .sidebar-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 30px 25px 20px; border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .sidebar-header h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0; letter-spacing: 2px; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #000; padding: 0; }
+
+        .sidebar-menu { list-style: none; padding: 25px; margin: 0; flex-grow: 1; }
+        .sidebar-menu li { margin-bottom: 22px; }
+        .sidebar-menu a {
+            text-decoration: none; color: #000; font-size: 13px; font-weight: 600;
+            letter-spacing: 1.5px; text-transform: uppercase; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .sidebar-menu a i { font-size: 10px; }
+
+        .sidebar-help { padding: 0 25px; margin-bottom: 30px; }
+        .help-title { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; margin-bottom: 15px; }
+        .sidebar-help a {
+            display: flex; align-items: center; text-decoration: none; color: #444;
+            font-size: 14px; margin-bottom: 12px; font-weight: 400;
+        }
+        .sidebar-help a i { width: 25px; font-size: 14px; text-align: left; }
+
+        .whatsapp-btn-container { padding: 0 25px 30px; }
+        .whatsapp-btn {
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            background-color: #25D366; color: #fff; text-decoration: none;
+            padding: 14px 0; border-radius: 6px; font-weight: 500; font-size: 15px;
+        }
+
+        /* --- NEW ARRIVALS CONTENT --- */
+        header { text-align: center; padding: 130px 20px 40px; }
+        header h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 5px; }
+        header p { font-size: 1rem; color: #555; }
+
+        .collection-section { padding: 0 20px 60px; max-width: 1200px; margin: 0 auto; text-align: center; }
+
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
+            margin-bottom: 30px;
+        }
+        
+        .product-card { text-align: left; }
+        .img-container { 
+            height: 350px; background-color: #eee; border-radius: 8px; 
+            overflow: hidden; margin-bottom: 15px; position: relative;
+        }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .product-card:hover .img-container img { transform: scale(1.03); }
+        
+        .badge-new {
+            position: absolute; top: 10px; left: 10px; background-color: #000; color: #fff;
+            padding: 5px 10px; font-size: 10px; font-weight: 600; letter-spacing: 1px;
+            text-transform: uppercase; border-radius: 2px;
+        }
+
+        .product-info h3 { font-size: 14px; margin: 0 0 5px 0; font-weight: 500; }
+        .product-price { font-size: 14px; font-weight: 600; color: #000; }
+
+        @media (max-width: 900px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .img-container { height: 250px; }
+        }
+
+        /* --- FOOTER --- */
+        .talism-footer { background-color: #F4EBEB; padding: 60px 10%; text-align: left; border-top: 1px solid rgba(0,0,0,0.05); }
+        .footer-col h4 { font-size: 13px; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; border-bottom: 1px solid rgba(0,0,0,0.1); width: fit-content; padding-bottom: 5px; }
+        .footer-col a, .footer-col p { display: block; font-size: 13px; color: #333; text-decoration: none; margin-bottom: 12px; }
+        .copyright { font-size: 10px; margin-top: 40px; opacity: 0.4; text-align: center; width: 100%; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-left"><button class="icon-btn" onclick="openMenu()"><i class="fa-solid fa-bars"></i></button></div>
+        <div class="nav-center"><a href="index.html" class="nav-logo"><img src="logo2.png" alt="TALISM"></a></div>
+        <div class="nav-right"><button class="icon-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+    </nav>
+
+    <!-- SIDEBAR MENU -->
+    <div class="sidebar-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="sidebar" id="sideMenu">
+        <div class="sidebar-header">
+            <h2>TALISM</h2>
+            <button class="close-btn" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="new-arrivals.html">NEW ARRIVALS</a></li>
+            <li><a href="stara.html">STARA CLOTHING <i class="fa-solid fa-chevron-down"></i></a></li>
+            <li><a href="hijabs.html">HIJABS & NIQABS</a></li>
+            <li><a href="handbags.html">MINIMALIST HANDBAGS</a></li>
+            <li><a href="perfume.html">SIGNATURE SCENTS</a></li>
+        </ul>
+
+        <div class="sidebar-help">
+            <p class="help-title">CUSTOMER HELP</p>
+            <a href="#"><i class="fa-solid fa-location-dot"></i> Track Order</a>
+            <a href="#"><i class="fa-solid fa-ruler-horizontal"></i> Size Guide</a>
+            <a href="#"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+            <a href="#" style="padding-left: 25px;">Product Care</a> <!-- No icon in image reference -->
+        </div>
+
+        <div class="whatsapp-btn-container">
+            <a href="https://wa.me/255684143537" class="whatsapp-btn">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <header>
+        <h1>Just Landed</h1>
+        <p>The latest additions to the TALISM collection.</p>
+    </header>
+
+    <section class="collection-section">
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="img-container">
+                    <span class="badge-new">New</span>
+                    <img src="Abaya1.jpg" alt="Midnight Silk Abaya">
+                </div>
+                <div class="product-info">
+                    <h3>Midnight Silk Abaya</h3>
+                    <span class="product-price">Tsh 120,000</span>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="img-container">
+                    <span class="badge-new">New</span>
+                    <img src="Handbag1.jpg" alt="Oud Leather Tote">
+                </div>
+                <div class="product-info">
+                    <h3>Oud Leather Tote</h3>
+                    <span class="product-price">Tsh 85,000</span>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="img-container">
+                    <span class="badge-new">New</span>
+                    <img src="Khaftan1.jpg" alt="Desert Sand Kaftan">
+                </div>
+                <div class="product-info">
+                    <h3>Desert Sand Kaftan</h3>
+                    <span class="product-price">Tsh 95,000</span>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="img-container">
+                    <span class="badge-new">New</span>
+                    <img src="Modestmaxidress1.jpg" alt="Blush Maxi Dress">
+                </div>
+                <div class="product-info">
+                    <h3>Blush Maxi Dress</h3>
+                    <span class="product-price">Tsh 110,000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="talism-footer">
+        <div class="footer-col">
+            <h4>Information</h4>
+            <a href="#">Delivery & Returns</a>
+            <a href="#">About Us</a>
+            <a href="#">Customer Care</a>
+        </div>
+        <div class="footer-col">
+            <h4>Get In Touch</h4>
+            <p>WhatsApp: +255 684 143 537</p>
+            <p>Location: Dar es Salaam, Tanzania</p>
+        </div>
+        <p class="copyright">© 2026 TALISM LUXURY STORE. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <!-- SIDEBAR SCRIPT -->
+    <script>
+        function openMenu() {
+            document.getElementById('sideMenu').classList.add('active');
+            document.getElementById('menuOverlay').classList.add('active');
+            // Prevent background scrolling when menu is open
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('active');
+            document.getElementById('menuOverlay').classList.remove('active');
+            // Restore background scrolling
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
+
