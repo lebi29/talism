@@ -179,5 +179,53 @@
         <p class="copyright">© 2026 TALISM LUXURY STORE. ALL RIGHTS RESERVED.</p>
     </footer>
 
+    <!-- DYNAMIC SEARCH FILTER SCRIPT FOR SHOP PAGE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Get the searched word from the URL (e.g. ?search=abaya)
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                
+                // 2. Find all category sections on the shop page
+                const sections = document.querySelectorAll('.collection-section'); 
+                let itemsFound = false;
+
+                sections.forEach(section => {
+                    // 3. Check section titles
+                    const sectionText = section.innerText.toLowerCase();
+                    
+                    // 4. Check image names just in case
+                    const images = section.querySelectorAll('img');
+                    let altText = '';
+                    images.forEach(img => altText += img.alt.toLowerCase() + ' ');
+
+                    // If the typed word matches the section or its images, show it
+                    if (sectionText.includes(query) || altText.includes(query)) {
+                        section.style.display = ''; 
+                        itemsFound = true;
+                    } else {
+                        // Otherwise, hide it
+                        section.style.display = 'none'; 
+                    }
+                });
+
+                // 5. Update the main header to show it is a search result
+                const headerH1 = document.querySelector('header h1');
+                const headerP = document.querySelector('header p');
+                
+                if (headerH1 && headerP) {
+                    headerH1.innerText = "Search Results";
+                    if (itemsFound) {
+                        headerP.innerText = `Showing collections matching "${searchQuery}"`;
+                    } else {
+                        headerP.innerText = `No collections matched "${searchQuery}"`;
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
