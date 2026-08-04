@@ -317,33 +317,60 @@
             arrow.classList.toggle("rotate");
         }
 
-        // --- SMART SEARCH ROUTER ---
+        // --- FULLY DYNAMIC SMART SEARCH ROUTER ---
         function handleSearch(event) {
             if (event.key === 'Enter') {
                 const query = event.target.value.toLowerCase().trim();
                 if (!query) return;
 
-                // Match keywords to your respective pages
+                // 1. Check for specific information/policy pages first
+                const infoPages = {
+                    'about': 'about-us.html', 'talism': 'about-us.html', 'who': 'about-us.html',
+                    'faq': 'faqs.html', 'help': 'faqs.html', 'question': 'faqs.html',
+                    'size': 'size-guide.html', 'guide': 'size-guide.html',
+                    'track': 'track-order.html', 'order': 'track-order.html',
+                    'delivery': 'delivery-returns.html', 'shipping': 'delivery-returns.html',
+                    'refund': 'refund-exchange.html', 'return': 'refund-exchange.html', 'exchange': 'refund-exchange.html',
+                    'privacy': 'privacy-policy.html',
+                    'term': 'terms-of-service.html', 'service': 'terms-of-service.html',
+                    'care': 'product-care.html', 'wash': 'product-care.html'
+                };
+
+                // Loop through the info pages to see if the typed word matches one
+                for (let key in infoPages) {
+                    if (query.includes(key)) {
+                        window.location.href = infoPages[key];
+                        return; // Stop here if an info page is found
+                    }
+                }
+                
+                // 2. Check for your main dedicated category pages
                 if (query.includes('perfume') || query.includes('scent') || query.includes('fragrance')) {
                     window.location.href = 'perfume.html';
-                } else if (query.includes('abaya') || query.includes('kimono') || query.includes('stara') || query.includes('clothing')) {
+                    return;
+                } else if (query.includes('abaya') || query.includes('kimono') || query.includes('stara')) {
                     window.location.href = 'abaya-kimonos.html';
+                    return;
                 } else if (query.includes('kaftan')) {
                     window.location.href = 'kaftans.html';
+                    return;
                 } else if (query.includes('maxi') || query.includes('dress')) {
                     window.location.href = 'maxi-dresses.html';
+                    return;
                 } else if (query.includes('hijab') || query.includes('niqab')) {
                     window.location.href = 'hijabs.html';
+                    return;
                 } else if (query.includes('handbag') || query.includes('bag')) {
                     window.location.href = 'handbags.html';
+                    return;
                 } else if (query.includes('new') || query.includes('arrival')) {
                     window.location.href = 'new-arrivals.html';
-                } else if (query.includes('track') || query.includes('order')) {
-                    window.location.href = 'track-order.html';
-                } else {
-                    // Default fallback to main shop page if no specific keyword matches
-                    window.location.href = 'shop.html';
+                    return;
                 }
+
+                // 3. THE CATCH-ALL (Any other word typed goes here)
+                // If it doesn't match a page above, send the exact word to shop.html as a URL parameter
+                window.location.href = 'shop.html?search=' + encodeURIComponent(query);
             }
         }
     </script>
