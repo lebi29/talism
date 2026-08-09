@@ -35,12 +35,16 @@
             box-shadow: 2px 0 15px rgba(0,0,0,0.1);
         }
         .sidebar.active { left: 0; }
+        
+        /* Flex containers to push footer to the bottom */
+        .sidebar-content { flex-grow: 1; }
+        .sidebar-footer { margin-top: auto; padding-bottom: 20px; }
 
         .sidebar-header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 30px 25px 20px; border-bottom: 1px solid rgba(0,0,0,0.08);
         }
-        .sidebar-logo { height: 24px; width: auto; }
+        .sidebar-logo { height: 32px; width: auto; }
         .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #000; padding: 0; }
 
         .sidebar-menu { list-style: none; padding: 25px; margin: 0; }
@@ -67,7 +71,7 @@
         }
 
         .sidebar-socials {
-            display: flex; justify-content: center; gap: 25px; padding: 0 25px 35px;
+            display: flex; justify-content: center; gap: 25px; padding: 0 25px 15px;
         }
         .sidebar-socials a { color: #000; font-size: 18px; text-decoration: none; }
 
@@ -149,39 +153,47 @@
     <!-- SIDEBAR MENU -->
     <div class="sidebar-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="sidebar" id="sideMenu">
-        <div class="sidebar-header">
-            <img src="logo2.png" alt="TALISM" class="sidebar-logo">
-            <button class="close-btn" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
+        
+        <!-- TOP CONTENT WRAPPER -->
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <img src="logo2.png" alt="TALISM" class="sidebar-logo">
+                <button class="close-btn" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="shop.html">SHOP COLLECTION</a></li>
+                <li><a href="new-arrivals.html">NEW ARRIVALS</a></li>
+                <li><a href="hijabs.html">HIJABS & NIQABS</a></li>
+                <li><a href="handbags.html">MINIMALIST HANDBAGS</a></li>
+                <li><a href="perfume.html">SIGNATURE SCENTS</a></li>
+            </ul>
+
+            <div class="sidebar-help">
+                <p class="help-title">CUSTOMER HELP</p>
+                <a href="track-order.html"><i class="fa-solid fa-location-dot"></i> Track Order</a>
+                <a href="size-guide.html"><i class="fa-solid fa-ruler-horizontal"></i> Size Guide</a>
+                <a href="faqs.html"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+                <a href="product-care.html" style="padding-left: 25px;">Product Care</a>
+            </div>
+        </div>
+
+        <!-- BOTTOM CONTENT WRAPPER -->
+        <div class="sidebar-footer">
+            <div class="whatsapp-btn-container">
+                <a href="https://wa.me/255684143537" class="whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+
+            <div class="sidebar-socials">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
         </div>
         
-        <ul class="sidebar-menu">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="shop.html">SHOP COLLECTION</a></li>
-            <li><a href="new-arrivals.html">NEW ARRIVALS</a></li>
-            <li><a href="hijabs.html">HIJABS & NIQABS</a></li>
-            <li><a href="handbags.html">MINIMALIST HANDBAGS</a></li>
-            <li><a href="perfume.html">SIGNATURE SCENTS</a></li>
-        </ul>
-
-        <div class="sidebar-help">
-            <p class="help-title">CUSTOMER HELP</p>
-            <a href="track-order.html"><i class="fa-solid fa-location-dot"></i> Track Order</a>
-            <a href="size-guide.html"><i class="fa-solid fa-ruler-horizontal"></i> Size Guide</a>
-            <a href="faqs.html"><i class="fa-solid fa-circle-question"></i> FAQs</a>
-            <a href="product-care.html" style="padding-left: 25px;">Product Care</a>
-        </div>
-
-        <div class="whatsapp-btn-container">
-            <a href="https://wa.me/255684143537" class="whatsapp-btn">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-        </div>
-
-        <div class="sidebar-socials">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#"><i class="fa-solid fa-podcast"></i></a>
-        </div>
     </div>
 
     <!-- HEADER -->
