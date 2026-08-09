@@ -40,7 +40,7 @@
             display: flex; justify-content: space-between; align-items: center;
             padding: 30px 25px 20px; border-bottom: 1px solid rgba(0,0,0,0.08);
         }
-        .sidebar-header h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0; letter-spacing: 2px; }
+        .sidebar-logo { height: 24px; width: auto; }
         .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #000; padding: 0; }
 
         .sidebar-menu { list-style: none; padding: 25px; margin: 0; }
@@ -59,12 +59,17 @@
         }
         .sidebar-help a i { width: 25px; font-size: 14px; text-align: left; }
 
-        .whatsapp-btn-container { padding: 0 25px 30px; }
+        .whatsapp-btn-container { padding: 0 25px 25px; }
         .whatsapp-btn {
             display: flex; justify-content: center; align-items: center; gap: 8px;
             background-color: #25D366; color: #fff; text-decoration: none;
             padding: 14px 0; border-radius: 6px; font-weight: 500; font-size: 15px;
         }
+
+        .sidebar-socials {
+            display: flex; justify-content: center; gap: 25px; padding: 0 25px 35px;
+        }
+        .sidebar-socials a { color: #000; font-size: 18px; text-decoration: none; }
 
         /* --- SHOP CONTENT --- */
         header { text-align: center; padding: 130px 20px 40px; }
@@ -145,7 +150,7 @@
     <div class="sidebar-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="sidebar" id="sideMenu">
         <div class="sidebar-header">
-            <h2>TALISM</h2>
+            <img src="logo2.png" alt="TALISM" class="sidebar-logo">
             <button class="close-btn" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         
@@ -170,6 +175,12 @@
             <a href="https://wa.me/255684143537" class="whatsapp-btn">
                 <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
             </a>
+        </div>
+
+        <div class="sidebar-socials">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#"><i class="fa-solid fa-podcast"></i></a>
         </div>
     </div>
 
