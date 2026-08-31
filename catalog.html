@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TALISM — Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="shell">
+    <section id="auth-view" class="auth-card">
+      <p class="eyebrow">TALISM / PRIVATE ACCESS</p><h1>Catalog archive</h1>
+      <p class="muted">Sign in to view and manage every uploaded product.</p>
+      <form id="login-form" class="stack"><label>Email<input id="email" type="email" autocomplete="username" required></label><label>Password<input id="password" type="password" autocomplete="current-password" required></label><button class="button dark" type="submit">Open catalog</button><p id="login-error" class="error" role="alert"></p></form>
+    </section>
+    <section id="app-view" class="app-view hidden">
+      <header class="topbar"><div><p class="eyebrow">TALISM / CATALOG ARCHIVE</p><h1>All products</h1></div><div class="top-actions"><a class="button quiet" href="admin.html">Add product</a><button id="logout" class="button quiet">Sign out</button></div></header>
+      <section class="panel"><div class="catalog-toolbar"><input id="search" class="search" placeholder="Search by name, category, or price"><select id="status-filter"><option value="all">All products</option><option value="published">Published</option><option value="draft">Drafts</option></select><span id="count" class="muted"></span></div><div id="product-list" class="catalog-grid"></div><p id="page-message" class="message" role="status"></p></section>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="catalog.js"></script>
+</body>
+</html>
