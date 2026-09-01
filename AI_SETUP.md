@@ -11,10 +11,10 @@ In **Edge Function Secrets**, add the following value. Use the same browser-safe
 | Name | Value |
 |---|---|
 | `GEMINI_API_KEY` | The Google AI Studio key you created. |
-| `SUPABASE_ANON_KEY` | The Supabase publishable/anon key. |
+| `TALISM_DATABASE_KEY` | The Supabase publishable/anon key. Use the `sb_publishable_...` value. |
 | `GEMINI_MODEL` | Optional; defaults to `gemini-2.5-flash`. |
 
-Supabase automatically provides `SUPABASE_URL` to Edge Functions. If the dashboard asks whether JWT verification should be enabled, disable gateway JWT verification for this public customer-help function; the function validates the request shape and does not expose management operations. Product management remains protected by Supabase Auth and RLS.
+Supabase automatically provides `SUPABASE_URL` to Edge Functions. Custom secrets may not use the reserved `SUPABASE_` prefix, so this function uses `TALISM_DATABASE_KEY` for the database client key. If the dashboard asks whether JWT verification should be enabled, disable gateway JWT verification for this public customer-help function; the function validates the request shape and does not expose management operations. Product management remains protected by Supabase Auth and RLS.
 
 ## GitHub Pages setup
 
